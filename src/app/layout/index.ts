@@ -1,0 +1,1 @@
+export { default as MainLayout } from './ui/index.vue'

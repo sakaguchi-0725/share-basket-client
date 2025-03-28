@@ -1,0 +1,1 @@
+export { default as MyBasketPage } from './ui/index.vue'
