@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <div class="w-full mt-4">
-    <h2 class="text-xl font-bold text-center mb-5">ログインする</h2>
+    <h2 class="text-xl font-bold text-center mb-5">ログイン</h2>
     <div class="space-y-4">
       <TextInput id="email" type="email" placeholder="test@example.com">
         メールアドレス
@@ -25,4 +25,4 @@ import { RouterLink } from 'vue-router'
       </div>
     </div>
   </div>
-</template> 
+</template>
