@@ -1,0 +1,1 @@
+export { default as AppProvider } from './ui/app-provider.vue'

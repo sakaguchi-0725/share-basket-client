@@ -1,0 +1,1 @@
+export { default as SignUpPage } from './ui/index.vue'
