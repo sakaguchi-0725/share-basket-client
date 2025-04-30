@@ -1,9 +1,20 @@
 <script setup lang="ts">
-defineProps<{
+import { computed } from 'vue';
+
+const props = defineProps<{
   id: string
   type: 'text' | 'email'
   placeholder?: string
+  errorMessage?: string
 }>()
+
+const model = defineModel({ required: true })
+
+const classes = computed(() => ({
+  'border p-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent': true,
+  'border-red-500': props.errorMessage !== undefined,
+  'border-gray-400': props.errorMessage === undefined
+}))
 </script>
 
 <template>
@@ -14,8 +25,11 @@ defineProps<{
     <input
       :id="id"
       :type="type"
-      class="border border-gray-400 p-2 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+      v-model="model"
+      v-bind="$attrs"
+      :class="classes"
       :placeholder="placeholder"
     />
+    <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
   </div>
 </template>
