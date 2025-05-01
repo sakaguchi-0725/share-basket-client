@@ -1,16 +1,19 @@
 import { useForm } from "vee-validate"
+import { onMounted, ref } from "vue"
+import { useRouter } from "vue-router"
 import { schema, type Form } from "../model"
 import { toTypedSchema } from "@vee-validate/zod"
-import { useRouter } from "vue-router"
-import { ref } from "vue"
 import { handleRequest } from "@/shared/api"
-import { signUp } from "../api"
+import { signUpConfirm } from "../api"
 import { convertToRequest } from "./functions"
 import { session } from "@/shared/lib"
 
 export const useInteraction = () => {
   const router = useRouter()
+  const email = ref('')
   const errorMessage = ref<string>()
+
+  onMounted(() => email.value = session.getItem('email'))
 
   const { defineField, errors, handleSubmit } = useForm<Form>({
     validationSchema: toTypedSchema(schema)
@@ -18,19 +21,17 @@ export const useInteraction = () => {
 
   const onSubmit = handleSubmit(async (values) => {
     await handleRequest(
-      () => signUp(convertToRequest(values)),
-      () => {
-        session.setItem('email', values.email)
-        router.push({ name: 'signup-confirm' })
-      },
+      () => signUpConfirm(convertToRequest(email.value, values)),
+      () => router.push({ name: 'login' }),
       (msg: string) => errorMessage.value = msg
     )
   })
 
   return {
+    email,
     defineField,
     errors,
     errorMessage,
-    onSubmit
+    onSubmit,
   }
 }

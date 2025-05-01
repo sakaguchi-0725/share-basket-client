@@ -1,0 +1,1 @@
+export { default as SignUpConfirmPage } from './ui/index.vue'

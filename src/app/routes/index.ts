@@ -5,10 +5,17 @@ import { LoginPage } from "@/pages/login"
 import { SignUpPage } from "@/pages/signup"
 import { InternalServerError, NotFound } from "@/pages/error"
 import { applyAuthLayout } from "./functions"
+import { SignUpConfirmPage } from "@/pages/signup-confirm"
 
 const authRoutes = applyAuthLayout([
   { path: '/login', name: 'login', component: LoginPage },
-  { path: '/signup', name: 'signup', component: SignUpPage },
+  {
+    path: '/signup',
+    children: [
+      { path: '', name: 'signup', component: SignUpPage },
+      { path: 'confirm', name: 'signup-confirm', component: SignUpConfirmPage }
+    ]
+  }
 ])
 
 const routes: RouteRecordRaw[] = [
