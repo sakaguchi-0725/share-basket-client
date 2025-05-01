@@ -1,0 +1,1 @@
+export { default as ErrorBind } from './ui/error-band.vue'

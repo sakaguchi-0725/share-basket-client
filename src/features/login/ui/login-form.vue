@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { PasswordInput, PrimaryButton, TextInput } from '@/shared/ui'
+import { ErrorBind, PasswordInput, PrimaryButton, TextInput } from '@/shared/ui'
 import { useInteraction } from '../lib/use-interaction'
 import { RouterLink } from 'vue-router'
 
-const { defineField, errors } = useInteraction()
+const { defineField, errors, errorMessage, onSubmit } = useInteraction()
 
 const [email, emailProps] = defineField('email')
 const [password, passwordProps] = defineField('password')
@@ -20,14 +20,20 @@ const [password, passwordProps] = defineField('password')
       placeholder="test@example.com"
     >メールアドレス
     </TextInput>
+
     <PasswordInput
       id="password"
       v-model="password"
       v-bind="passwordProps"
       :error-message="errors.password"
     >パスワード</PasswordInput>
+
+    <ErrorBind v-if="errorMessage">
+      {{ errorMessage }}
+    </ErrorBind>
+
     <div class="flex flex-col space-y-4 mt-5">
-      <PrimaryButton size="full">ログイン</PrimaryButton>
+      <PrimaryButton size="full" @on-click="onSubmit">ログイン</PrimaryButton>
       <p class="text-center text-gray-800">
         アカウントをお持ちではないですか？<br />
         <RouterLink

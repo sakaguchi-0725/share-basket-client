@@ -66,18 +66,18 @@ const httpFetch = async <T>(
   }
 }
 
-export const Get = <T>(path: string, params?: Record<string, string>): Promise<ApiResponse<T>> => {
+export const apiGet = <T>(path: string, params?: Record<string, string>): Promise<ApiResponse<T>> => {
   return httpFetch<T>('get', path, params)
 }
 
-export const Post = <T>(path: string, body: unknown, params?: Record<string, string>): Promise<ApiResponse<T>> => {
+export const apiPost = <T>(path: string, body: unknown, params?: Record<string, string>): Promise<ApiResponse<T>> => {
   return httpFetch<T>('post', path, params, body)
 }
 
-export const Put = <T>(path: string, body: unknown, params?: Record<string, string>): Promise<ApiResponse<T>> => {
+export const apiPut = <T>(path: string, body: unknown, params?: Record<string, string>): Promise<ApiResponse<T>> => {
   return httpFetch<T>('put', path, params, body)
 }
 
-export const Delete = <T = void>(path: string, params?: Record<string, string>): Promise<ApiResponse<T>> => {
+export const apiDelete = <T = void>(path: string, params?: Record<string, string>): Promise<ApiResponse<T>> => {
   return httpFetch<T>('delete', path, params)
 }
