@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { PrimaryButton, OutlineButton } from '@/shared/ui/button'
+import { PrimaryButton, OutlineButton } from '@/shared/ui'
 
 const isMenuOpen = ref(false)
 const toggleMenu = () => {

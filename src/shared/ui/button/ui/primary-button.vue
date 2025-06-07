@@ -6,6 +6,10 @@ defineProps<{
   size?: ButtonSize
   disabled?: boolean
 }>()
+
+defineEmits<{
+  onClick: []
+}>()
 </script>
 
 <template>
@@ -14,6 +18,7 @@ defineProps<{
     variant="primary"
     :disabled="disabled"
     v-bind="$attrs"
+    @on-click="$emit('onClick')"
   >
     <slot></slot>
   </BaseButton>
