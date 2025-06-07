@@ -1,5 +1,5 @@
 import type { ApiResponse } from "../model"
-import { ERROR_CODES, ERROR_MESSAGES, type ApiError, type ErrorCode } from "../model"
+import { type ApiError } from "../model"
 
 type Request<T> = () => Promise<ApiResponse<T>>
 
@@ -10,17 +10,6 @@ export const isApiError = (error: unknown): error is ApiError => {
     'code' in error &&
     typeof (error as ApiError).code === 'string'
   )
-}
-
-export const isKnownErrorCode = (code: string): code is ErrorCode => {
-  return Object.values(ERROR_CODES).includes(code as ErrorCode)
-}
-
-const generateMessage = (error: ApiError) => {
-  if (isKnownErrorCode(error.code)) {
-    return ERROR_MESSAGES[error.code as keyof typeof ERROR_MESSAGES]
-  }
-  return '予期せぬエラーが発生しました。'
 }
 
 export const handleRequest = async <T>(
@@ -35,6 +24,6 @@ export const handleRequest = async <T>(
   }
 
   if (isApiError(res.body)) {
-    onFailure(generateMessage(res.body))
+    onFailure(res.body.message)
   }
 }

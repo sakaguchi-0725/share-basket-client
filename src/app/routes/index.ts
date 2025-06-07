@@ -29,8 +29,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/error',
     children: [
-      { path: '404', component: NotFound },
-      { path: '500', component: InternalServerError },
+      { path: '404', name: 'not-found', component: NotFound },
+      { path: '500', name: 'internal-server', component: InternalServerError },
     ]
   }
 ]
